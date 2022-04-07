@@ -1,0 +1,293 @@
+swagger: '2.0'
+info:
+  version: '2.0.0'
+  title: ' EMPLOYEE INFO'
+  description: ' This is an api that allows users to obtain information in the data base of existing information of employees or post info of new employees and the users'
+  contact:
+    name: shivu
+    url: shivusnayak27@gmail.com
+host: employeeinfo.com
+basePath: /
+securityDefinitions: {}
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /employees:
+    get:
+      description: to fetch all the information of the employees in the database
+      summary: Employees_GET
+      tags:
+      - employee operations
+      operationId: Employees_GET
+      deprecated: false
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: employee name
+        in: query
+        required: true
+        type: array
+        items:
+          type: string
+        description: ''
+      responses:
+        '200':
+          description: the data has been fetched
+          schema:
+            xml:
+              attribute: false
+              wrapped: false
+            type: array
+            default: ''
+            items:
+              $ref: '#/definitions/EmployeesResponse'
+          headers: {}
+    post:
+      description: to add new joiner into the database
+      summary: Employees_POST
+      tags:
+      - employee operations
+      operationId: Employees_POST
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/EmployeesRequest'
+      responses:
+        '200':
+          description: sucessfully addes the new joiner into the employee info
+          headers: {}
+  /employee/{id}:
+    get:
+      description: to fetch the employee data using path parameter
+      summary: EmployeeById_GET
+      tags:
+      - employee operations
+      operationId: EmployeeById_GET
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int32
+        description: the id of the employee
+      responses:
+        '200':
+          description: the data has been fetched sucessfully
+          schema:
+            type: array
+            default: ''
+            items:
+              $ref: '#/definitions/EmployeeResponse'
+          headers: {}
+    delete:
+      description: to delete a specific employe from the employee database
+      summary: EmployeeById_DELETE
+      tags:
+      - employee operations
+      operationId: EmployeeById_DELETE
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int32
+        description: id of the employee that needs to be deleted
+      responses:
+        '200':
+          description: the data has been deleted sucessfully
+          headers: {}
+    put:
+      description: to upadte the info of the employee by using id
+      summary: EmployeeById_PUT
+      tags:
+      - employee operations
+      operationId: EmployeeById_PUT
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: array
+        items:
+          type: string
+        description: the id of employe who needs to update the info
+      responses:
+        '200':
+          description: the repsected employee has been updated
+          headers: {}
+  /signup:
+    post:
+      description: to register the new user
+      summary: Signup_POST
+      tags:
+      - users info
+      operationId: Signup_POST
+      deprecated: false
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/SignupRequest'
+      responses:
+        '200':
+          description: user added sucessfully
+          headers: {}
+  /users:
+    get:
+      description: Operatipn to fetch users
+      summary: Users_GET
+      tags:
+      - users info
+      operationId: Users_GET
+      deprecated: false
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: query
+        required: true
+        type: string
+        description: ''
+      responses:
+        '200':
+          description: success Response
+          schema:
+            type: array
+            default: ''
+            items:
+              $ref: '#/definitions/UsersResponse'
+          headers: {}
+definitions:
+  EmployeesResponse:
+    title: EmployeesResponse
+    type: object
+    properties:
+      id:
+        example: 2
+        type: integer
+        format: int32
+      employee name:
+        example: shiv
+        type: string
+      employee designation:
+        example: bootcamper
+        type: string
+  EmployeesRequest:
+    title: EmployeesRequest
+    type: object
+    properties:
+      id:
+        example: 2
+        type: integer
+        format: int32
+      employee name:
+        example: shiv
+        type: string
+      employee designation:
+        example: bootcamper
+        type: string
+  EmployeeResponse:
+    title: EmployeeResponse
+    type: object
+    properties:
+      id:
+        example: 2
+        type: integer
+        format: int32
+      employee name:
+        example: shiv
+        type: string
+      employee designation:
+        example: bootcamper
+        type: string
+  id:
+    title: id
+    type: object
+    properties:
+      id:
+        example: 2
+        type: integer
+        format: int32
+      employee name:
+        example: shiv
+        type: string
+      employee designation:
+        example: bootcamper
+        type: string
+  SignupRequest:
+    title: SignupRequest
+    type: object
+    properties:
+      phone number:
+        example: 9765545676
+        type: integer
+        format: int64
+      user name:
+        example: shiv
+        type: string
+      password:
+        example: 1w23e4r5
+        type: string
+  UsersResponse:
+    title: UsersResponse
+    type: object
+    properties:
+      phone number:
+        example: 9765545676
+        type: integer
+        format: int64
+      user name:
+        example: shiv
+        type: string
+      password:
+        example: 1w23e4r5
+        type: string
+tags:
+- name: employee operations
+- name: users info

@@ -1,0 +1,204 @@
+openapi: 3.0.3
+info:
+  version: 2.0.0
+  title: " EMPLOYEE INFO"
+  description: " This is an api that allows users to obtain information in the data base of existing information of employees or post info of new employees and the users"
+  termsOfService: https://shivu.com
+  contact:
+    name: shivu
+    url: shivusnayak27@gmail.com
+    
+  license:
+    name: torry harries licence
+    url : http://torryharriess.com
+servers: 
+  - url: http://employeeinfo.com
+    description: employeee server
+    
+  - url: https://shivu27info.com
+    description: shivu server
+  
+paths:
+  /employees:
+    get:
+      description: to fetch all the information of the employees in the database
+      parameters: 
+       - in: query
+         name: employee name
+         required: true
+         schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200: 
+          description: the data has been fetched 
+          content: 
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        
+                      employee name:
+                        type: string
+                        example: shiv
+                      
+                      employee designation:
+                        type: string
+                        example: bootcamper
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        
+                      employee name:
+                        type: string
+                        example: shiv
+                      
+                      employee designation:
+                        type: string
+                        example: bootcamper
+    post:        
+      description: to add new joiner into the database
+      requestBody:
+        required: true
+        content:
+           application/json:
+                schema:
+                  type: object
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        
+                      employee name:
+                        type: string
+                        example: shiv
+                      
+                      employee designation:
+                        type: string
+                        example: bootcamper
+          
+      responses:
+        200:
+          description: sucessfully addes the new joiner into the employee info
+          
+  /employee/{id}:
+    get:
+      description: to fetch the employee data using path parameter
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          description: the id of the employee
+          schema:
+            type: integer
+            example: 2
+      responses:
+        200:
+          description: the data has been fetched sucessfully
+          content:
+           application/json:
+                schema:
+                  type: object
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        
+                      employee name:
+                        type: string
+                        example: shiv
+                      
+                      employee designation:
+                        type: string
+                        example: bootcamper
+    delete:
+      description: to delete a specific employe from the employee database
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id of the employee that needs to be deleted 
+          schema: 
+            type: integer
+            example: 2
+            
+      responses:
+        200:
+          description: the data has been deleted sucessfully
+    put: 
+      description: to upadte the info of the employee by using id
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          description: the id of employe who needs to update the info
+          schema:
+            type: object
+            items:
+              properties:
+                      id:
+                        type: integer
+                        example: 2
+                        
+                      employee name:
+                        type: string
+                        example: shiv
+                      
+                      employee designation:
+                        type: string
+                        example: bootcamper           
+            
+      responses:
+        200:
+          description: the repsected employee has been updated
+  /signup:
+    post: 
+      description: to register the new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              items: 
+                 properties:
+                      phone number:
+                        type: integer
+                        example: 9765545676
+                        
+                      user name:
+                        type: string
+                        example: shiv
+                      
+                      password:
+                        type: string
+                        example: 1w23e4r5   
+      responses:
+        200:
+          description: user added sucessfully
+             
+                    
+                  
+              
+            
+            
+        
+            
+        
+                      
+                      
+          
+      
+          
